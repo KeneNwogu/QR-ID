@@ -1,0 +1,64 @@
+<html>
+<head>
+   <meta charset="UTF-8"><title>QR Code Generator</title>
+   <link href="{{ url_for('static', filename='css/form.css')}}" rel="stylesheet" type="text/css">
+   <script src="{{ url_for('static', filename='js/validation.js')}}"></script>
+</head>
+<body class="zf-backgroundBg"><!-- Change or deletion of the name attributes in the input tag will lead to empty values on record submission-->
+<div class="zf-templateWidth">
+   <form
+      action='{{ url_for("create_qr_code") }}'
+      name='form' method='POST'
+      onSubmit='javascript:document.charset="UTF-8"; return zf_ValidateAndSubmit();'
+      accept-charset='UTF-8' enctype='multipart/form-data' id='form'>
+      {{ form.csrf_token }}
+      <div class="zf-templateWrapper"><!---------template Header Starts Here---------->
+         <ul class="zf-tempHeadBdr"><li class="zf-tempHeadContBdr"><h2 class="zf-frmTitle"><em>Generate QR Code</em></h2>
+            <p class="zf-frmDesc">Fill the form to generate a personal link and QR Code!</p>
+            <div class="zf-clearBoth"></div></li></ul><!---------template Header Ends Here---------->
+            <!---------template Container Starts Here---------->
+            <div class="zf-subContWrap zf-leftAlign"><ul>
+               {% for field in form %}
+                  {% if field.name != 'csrf_token' %}
+                     <!---------Email Starts Here---------->
+                     <li class="zf-tempFrmWrapper zf-small">
+                        <label class="zf-labelName">{{ field.name }}<em class="zf-important">*</em></label>
+                        <div class="zf-tempContDiv">
+                           <span>
+                              <input
+                                  fieldType=9 type="text" maxlength="255" name="{{ field.name }}"
+                                  checktype="c5" value="" placeholder=""
+                              />
+                           </span>
+                           <p id="{{ field.name }}_error" class="zf-errorMessage" style="display:none;">Invalid value</p>
+                        </div>
+                        <div class="zf-clearBoth"></div>
+                     </li><!---------Email Ends Here---------->
+                  {% endif %}
+               {% endfor %}
+            </ul>
+         </div>
+         <!---------template Container Starts Here---------->
+         <ul>
+            <li class="zf-fmFooter">
+               <button class="zf-submitColor" type="submit">Submit</button>
+            </li>
+         </ul>
+      </div><!-- 'zf-templateWrapper' ends -->
+   </form>
+</div><!-- 'zf-templateWidth' ends -->
+
+
+<div style="margin: 0 auto">
+   <a class="" href="{{ url_for('check_qr_code') }}">Upload and check QR code here!</a>
+</div>
+
+<script type="text/javascript">
+var zf_DateRegex = new RegExp("^(([0][1-9])|([1-2][0-9])|([3][0-1]))[-](Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec|JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)[-](?:(?:19|20)[0-9]{2})$");
+var zf_MandArray = [ "Name_First", "Name_Last", "Email", "MultiLine"]; 
+var zf_FieldArray = [ "Name_First", "Name_Last", "Email", "PhoneNumber_countrycode", "MultiLine"]; 
+var isSalesIQIntegrationEnabled = false;
+var salesIQFieldsArray = [];
+</script>
+</body>
+</html>

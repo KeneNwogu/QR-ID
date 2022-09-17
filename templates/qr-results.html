@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <title>Download Your QR Code</title>
+</head>
+<body>
+   <!--   Display QR Code  -->
+   <div class="qr-image">
+      <img src="{{ url_for('static', filename='QRs/' + qrcode) }}"/>
+   </div>
+
+   <div style="margin: 0 auto">
+      <a href="{{ url_for('static', filename='QRs/' + qrcode) }}">DOWNLOAD</a>
+      <a class="" href="{{ url_for('check_qr_code') }}">Upload and check QR code here!</a>
+   </div>
+</body>
+</html>

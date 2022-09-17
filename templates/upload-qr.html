@@ -1,0 +1,43 @@
+<html>
+<head>
+   <meta charset="UTF-8"><title>QR Code Generator</title>
+   <link href="{{ url_for('static', filename='css/form.css')}}" rel="stylesheet" type="text/css">
+   <script src="{{ url_for('static', filename='js/validation.js')}}"></script>
+</head>
+<body class="zf-backgroundBg"><!-- Change or deletion of the name attributes in the input tag will lead to empty values on record submission-->
+<div class="zf-templateWidth">
+   <form
+      action='{{ url_for("check_qr_code") }}'
+      name='form' method='POST'
+      accept-charset='UTF-8' enctype='multipart/form-data' id='form'>
+      <div class="zf-templateWrapper"><!---------template Header Starts Here---------->
+         <ul class="zf-tempHeadBdr"><li class="zf-tempHeadContBdr"><h2 class="zf-frmTitle"><em>Upload QR Code</em></h2>
+            <p class="zf-frmDesc">Upload QR Code to redirect to your ID!</p>
+            <div class="zf-clearBoth"></div></li></ul><!---------template Header Ends Here---------->
+            <!---------template Container Starts Here---------->
+            <div class="zf-subContWrap zf-leftAlign"><ul>
+               <!---------Email Starts Here---------->
+               <li class="zf-tempFrmWrapper zf-small">
+                  <label class="zf-labelName">QR Image<em class="zf-important">*</em></label>
+                  <div class="zf-tempContDiv">
+                     <span>
+                        <input
+                            type="file" maxlength="255" name="qr"
+                            required
+                        />
+                     </span>
+                     <p id="qr_error" class="zf-errorMessage" style="display:none;">Invalid value</p>
+                  </div>
+                  <div class="zf-clearBoth"></div>
+               </li><!---------Email Ends Here---------->
+            </ul>
+         </div>
+         <!---------template Container Starts Here---------->
+         <ul>
+            <li class="zf-fmFooter">
+               <button class="zf-submitColor" type="submit">Submit</button>
+            </li>
+         </ul>
+      </div><!-- 'zf-templateWrapper' ends -->
+   </form>
+</div><!-- 'zf-templateWidth' ends -->
