@@ -17,7 +17,7 @@ app = Flask(__name__)
 
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY') or 'my-test-secret-for-now'
 app.config['MONGO_URI'] = os.environ.get('MONGO_URI') or 'mongodb://127.0.0.1/qr'
-app.config['UPLOAD_EXTENSIONS'] = {'.jpg', '.png'}
+app.config['UPLOAD_EXTENSIONS'] = {'.jpg', '.png', '.jpeg', '.PNG', '.JPG', '.JPEG'}
 app.config['UPLOAD_PATH'] = 'tmp'
 app.config['DEBUG'] = os.environ.get('DEBUG') or False
 
@@ -79,6 +79,10 @@ def check_qr_code():
     if request.method == "POST":
         file = request.files.get('qr')
         filename = secure_filename(file.filename)
+        if filename != '':
+            file_ext = os.path.splitext(filename)[1]
+            if file_ext not in app.config['UPLOAD_EXTENSIONS']:
+                abort(400)
         file.save(os.path.join(app.config['UPLOAD_PATH'], filename))
 
         data = decode(Image.open(os.path.join(app.config['UPLOAD_PATH'], filename)))
