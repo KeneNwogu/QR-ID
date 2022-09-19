@@ -3,16 +3,25 @@
 <head>
    <meta charset="UTF-8">
    <title>Download Your QR Code</title>
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+   <style>
+      a {
+         display: block
+      }
+   </style>
 </head>
-<body>
-   <!--   Display QR Code  -->
-   <div class="qr-image">
-      <img src="{{ url_for('static', filename='QRs/' + qrcode) }}"/>
-   </div>
+<body class="container" style="margin: 0 auto">
+   <div style="text-align: center">
+      <!--   Display QR Code  -->
+      <div class="qr-image">
+         <img src="{{ url_for('static', filename='QRs/' + qrcode) }}"/>
+      </div>
 
-   <div style="margin: 0 auto">
-      <a href="{{ url_for('static', filename='QRs/' + qrcode) }}">DOWNLOAD</a>
-      <a class="" href="{{ url_for('check_qr_code') }}">Upload and check QR code here!</a>
+      <div>
+         <a class="btn btn-info" href="{{ url_for('static', filename='QRs/' + qrcode) }}">DOWNLOAD</a>
+         <a class="btn btn-info" href="{{ url_for('check_qr_code') }}">Upload and check QR code here!</a>
+      </div>
    </div>
 </body>
 </html>

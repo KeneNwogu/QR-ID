@@ -27,16 +27,34 @@
                            <span>
                               <input
                                   fieldType=9 type="text" maxlength="255" name="{{ field.name }}"
-                                  checktype="c5" value="" placeholder=""
+                                  checktype="c5" value="{{ field.data or '' }}" placeholder=""
                                   required
                               />
                            </span>
-                           <p id="{{ field.name }}_error" class="zf-errorMessage" style="display:none;">Invalid value</p>
+                           {% if form.errors.get(field.name) %}
+                              <p id="{{ field.name }}_error" class="zf-errorMessage">
+                                 {{ form.errors.get(field.name)[0] }}
+                              </p>
+                           {% endif %}
                         </div>
                         <div class="zf-clearBoth"></div>
                      </li><!---------Email Ends Here---------->
                   {% endif %}
                {% endfor %}
+               <!--    separate profile image     -->
+               <li class="zf-tempFrmWrapper zf-small">
+                  <label class="zf-labelName">Profile Image<em class="zf-important">*</em></label>
+                  <div class="zf-tempContDiv">
+                     <span>
+                        <input
+                            type="file" maxlength="255" name="profile_image"
+                            required
+                        />
+                     </span>
+                     <p id="qr_error" class="zf-errorMessage" style="display:none;">Invalid value</p>
+                  </div>
+                  <div class="zf-clearBoth"></div>
+               </li><!---------Profile Ends Here---------->
             </ul>
          </div>
          <!---------template Container Starts Here---------->
