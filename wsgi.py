@@ -3,7 +3,7 @@ import os
 import cloudinary
 from cloudinary import uploader
 import pyqrcode
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlparse
 from bson import ObjectId
 from PIL import Image
 from flask import Flask, render_template, request, redirect, url_for, abort
@@ -66,7 +66,8 @@ def create_qr_code():
 
         user = mongo.db.users.insert_one(user_data)
         user_id = str(user.inserted_id)
-        base_url = 'https://' + request.remote_addr + '/profile'
+        hostname = urlparse(request.base_url).hostname
+        base_url = 'https://' + hostname + '/profile'
         user_profile_link = base_url + '/' + user_id
         qr = pyqrcode.create(user_profile_link)
         qr_image = qr.png(f'static/QRs/{user_id}.png', scale=6)
